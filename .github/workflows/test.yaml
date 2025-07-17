@@ -11,18 +11,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: Wandalen/wretry.action@master
-        with: # iOS tests are flaky for no good reason
+        with:
           command: |
             fastlane screenshots
           attempt_limit: 5
           attempt_delay: 30000
 
   test:
-    strategy:
-      matrix:
-        a: [0, 1, 2, 3, 4, 5, 6, 7]
-        b: [0, 1, 2, 3, 4, 5, 6, 7]
-      fail-fast: false
     runs-on: namespace-profile-macos-default
     steps:
       - uses: actions/checkout@v4

@@ -7,7 +7,7 @@ on:
 
 jobs:
   fastlane:
-    runs-on: namespace-profile-macos-default
+    runs-on: namespace-profile-qonto-demo
     steps:
       - uses: actions/checkout@v4
       - uses: Wandalen/wretry.action@master
@@ -18,7 +18,7 @@ jobs:
           attempt_delay: 30000
 
   test:
-    runs-on: namespace-profile-macos-default
+    runs-on: namespace-profile-qonto-demo
     steps:
       - uses: actions/checkout@v4
       - uses: Wandalen/wretry.action@master

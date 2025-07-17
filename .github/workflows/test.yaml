@@ -19,6 +19,11 @@ jobs:
 
   test:
     runs-on: namespace-profile-qonto-demo
+    strategy:
+      matrix:
+        a: [0, 1, 2, 3, 4, 5, 6, 7]
+        b: [0, 1, 2, 3, 4, 5, 6, 7]
+      fail-fast: false
     steps:
       - uses: actions/checkout@v4
       - uses: Wandalen/wretry.action@master

@@ -3,14 +3,7 @@ on:
   push:
     branches:
       - master
-  schedule:
-    - cron: "17 * * * *" # Hourly
   workflow_dispatch:
-    inputs:
-      run_on_ghrunners:
-        description: "Also run on GitHub-hosted runners"
-        required: false
-        type: boolean
 
 jobs:
   fastlane:
@@ -23,27 +16,12 @@ jobs:
             fastlane screenshots
           attempt_limit: 5
           attempt_delay: 30000
-      - name: Breakpoint if tests failed
-        if: failure() && github.ref_name == 'main'
-        uses: namespacelabs/breakpoint-action@v0
-        with:
-          duration: 5m
-          authorized-users: edganiukov,hugosantos,n-g,htr,nichtverstehen,gmichelo
 
   test:
     runs-on: namespace-profile-macos-default
     steps:
       - uses: actions/checkout@v4
       - uses: Wandalen/wretry.action@master
-        with: # iOS tests are flaky for no good reason
+        with:
           command: |
             xcodebuild test -scheme ios-demo -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.5' -quiet
-
-  test-ghrunners:
-    runs-on: macos-14
-    if: inputs.run_on_ghrunners
-    steps:
-      - uses: actions/checkout@v4
-      - run: |
-          sudo xcode-select -s /Applications/Xcode_15.4.app
-          xcodebuild test -scheme ios-demo -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.5' -quiet

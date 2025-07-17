@@ -18,6 +18,9 @@ jobs:
           attempt_delay: 30000
 
   test:
+    strategy:
+      matrix:
+        a: [0, 1, 2, 3]
     runs-on: namespace-profile-macos-default
     steps:
       - uses: actions/checkout@v4

@@ -7,7 +7,7 @@ on:
 
 jobs:
   fastlane:
-    runs-on: namespace-profile-macos-default
+    runs-on: namespace-profile-macos-sonoma
     steps:
       - uses: actions/checkout@v4
       - uses: Wandalen/wretry.action@master
@@ -22,7 +22,8 @@ jobs:
       matrix:
         a: [0, 1, 2, 3, 4, 5, 6, 7]
         b: [0, 1, 2, 3, 4, 5, 6, 7]
-    runs-on: namespace-profile-macos-default
+      fail-fast: false
+    runs-on: namespace-profile-macos-sonoma
     steps:
       - uses: actions/checkout@v4
       - uses: Wandalen/wretry.action@master
